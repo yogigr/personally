@@ -12,6 +12,7 @@ class Post extends Composer
      * @var array
      */
     protected static $views = [
+        'single',
         'partials.page-header',
         'partials.content',
         'partials.content-*',
@@ -26,6 +27,7 @@ class Post extends Composer
     {
         return [
             'title' => $this->title(),
+            'meta' => $this->meta(),
             'pagination' => $this->pagination(),
         ];
     }
@@ -80,5 +82,17 @@ class Post extends Composer
             'before' => '<p>'.__('Pages:', 'sage'),
             'after' => '</p>',
         ]);
+    }
+
+    /**
+     * Retrieve the meta data.
+     *
+     * @return array
+     */
+    public function meta() {
+        return [
+            'category' => get_the_category()[0]->name,
+            'date' => get_the_date()
+        ];
     }
 }

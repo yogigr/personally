@@ -34,7 +34,7 @@ export default async (app) => {
    */
   app
     .setUrl('http://localhost:3000')
-    .setProxyUrl('http://wordpress.test')
+    .setProxyUrl('https://wordpress.test')
     .watch(['resources/views', 'app']);
 
   /**
@@ -46,6 +46,11 @@ export default async (app) => {
    * @see {@link https://developer.wordpress.org/block-editor/how-to-guides/themes/theme-json}
    */
   app.wpjson
+    .setOption('styles', {
+      typography: {
+        fontFamily: 'var(--wp--preset--font-family--graphik)'
+      },
+    })
     .setSettings({
       background: {
         backgroundImage: true,

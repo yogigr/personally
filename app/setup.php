@@ -111,6 +111,15 @@ add_action('after_setup_theme', function () {
 		'header-text'          => array( 'site-title', 'site-description' ),
 		'unlink-homepage-logo' => true,
     ]);
+
+    /**
+     * Disable Admin Bar for All Users Except Admins
+     *
+     * @link https://www.wpbeginner.com/wp-tutorials/how-to-disable-wordpress-admin-bar-for-all-users-except-administrators/
+     */
+    if (!current_user_can('administrator') && !is_admin()) {
+        show_admin_bar(false);
+    }
 }, 20);
 
 /**
@@ -118,6 +127,7 @@ add_action('after_setup_theme', function () {
  *
  * @return void
  */
+/*
 add_action('widgets_init', function () {
     $config = [
         'before_widget' => '<section class="widget %1$s %2$s">',
@@ -135,4 +145,59 @@ add_action('widgets_init', function () {
         'name' => __('Footer', 'sage'),
         'id' => 'sidebar-footer',
     ] + $config);
+});
+*/
+
+
+add_action('customize_register', function($wp_customize) {
+    // remove static front page section
+    $wp_customize->remove_section('static_front_page');
+
+    // add custom homepage setting section
+    $wp_customize->add_section( 'personally_homepage_settings_section' , array(
+        'title'      => __( 'Homepage settings', 'personally' ),
+        'priority'   => 30,
+    ));
+
+    // tagline setting & control
+    $wp_customize->add_setting( 'personally_homepage_tagline_setting', array());
+    $wp_customize->add_control( new \WP_Customize_Control(
+        $wp_customize,
+        'personally_homepage_tagline_control',
+            array(
+                'label'      => __( 'Homepage tagline', 'personally' ),
+                'section'    => 'personally_homepage_settings_section',
+                'settings'   => 'personally_homepage_tagline_setting',
+                'priority'   => 1
+            )
+        )
+    );
+
+    // description setting and & control
+    $wp_customize->add_setting( 'personally_homepage_description_setting', array());
+    $wp_customize->add_control( new \WP_Customize_Control(
+        $wp_customize,
+        'personally_homepage_description_control',
+            array(
+                'label'      => __( 'Homepage description', 'personally' ),
+                'section'    => 'personally_homepage_settings_section',
+                'settings'   => 'personally_homepage_description_setting',
+                'priority'   => 1
+            )
+        )
+    );
+
+    // url setting and & control
+    $wp_customize->add_setting( 'personally_url_setting', array());
+    $wp_customize->add_control( new \WP_Customize_Control(
+        $wp_customize,
+        'personally_url_control',
+            array(
+                'label'      => __( 'URL', 'personally' ),
+                'section'    => 'personally_homepage_settings_section',
+                'settings'   => 'personally_url_setting',
+                'priority'   => 1
+            )
+        )
+    );
 });

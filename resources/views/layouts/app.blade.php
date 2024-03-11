@@ -1,5 +1,5 @@
 <!doctype html>
-<html @php(language_attributes())>
+<html @php(language_attributes()) class="!scroll-smooth">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,10 +7,10 @@
     @php(wp_head())
   </head>
 
-  <body @php(body_class())>
+  <body @php(body_class()) style="visibility: hidden">
+    <script>0</script>
     @php(wp_body_open())
-
-    <div id="app">
+    <div id="app" class="opacity-0">
       <a class="sr-only focus:not-sr-only" href="#main">
         {{ __('Skip to content') }}
       </a>
@@ -21,12 +21,7 @@
         @yield('content')
       </main>
 
-      @hasSection('sidebar')
-        <aside class="sidebar">
-          @yield('sidebar')
-        </aside>
-      @endif
-
+      @include('sections.newsletter')
       @include('sections.footer')
     </div>
 

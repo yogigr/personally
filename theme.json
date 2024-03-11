@@ -1249,6 +1249,16 @@
           "color": "#4c0519",
           "name": "Rose 950",
           "slug": "rose-950"
+        },
+        {
+          "color": "#c41740",
+          "name": "Primary",
+          "slug": "primary"
+        },
+        {
+          "color": "#ea9c28",
+          "name": "Secondary",
+          "slug": "secondary"
         }
       ]
     },
@@ -1287,6 +1297,11 @@
           "fontFamily": "ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,\"Liberation Mono\",\"Courier New\",monospace",
           "name": "Ui-monospace",
           "slug": "mono"
+        },
+        {
+          "fontFamily": "Graphik",
+          "name": "Graphik",
+          "slug": "graphik"
         }
       ],
       "fontSizes": [
@@ -1356,6 +1371,11 @@
           "slug": "9xl"
         }
       ]
+    }
+  },
+  "styles": {
+    "typography": {
+      "fontFamily": "var(--wp--preset--font-family--graphik)"
     }
   }
 }
